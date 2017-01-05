@@ -6,7 +6,7 @@ com/alisoft
 com/alisoft/xplatform
 com/alisoft/xplatform/asf
 com/alisoft/xplatform/asf/cache
-com/alisoft/xplatform/asf/cache/cool.mcc.core.cache.impl
-com/alisoft/xplatform/asf/cache/cool.mcc.core.cache.memcached
-com/alisoft/xplatform/asf/cache/cool.mcc.core.cache.memcached/client
+com/alisoft/xplatform/asf/cache/com.yangchangming.mcc.cache.impl
+com/alisoft/xplatform/asf/cache/com.yangchangming.mcc.cache.memcached
+com/alisoft/xplatform/asf/cache/com.yangchangming.mcc.cache.memcached/client
 
