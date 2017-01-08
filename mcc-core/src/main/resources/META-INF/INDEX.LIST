@@ -1,0 +1,12 @@
+JarIndex-Version: 1.0
+
+alisoft-xplatform-asf-cache-2.5.1-src.jar
+com
+com/alisoft
+com/alisoft/xplatform
+com/alisoft/xplatform/asf
+com/alisoft/xplatform/asf/cache
+com/alisoft/xplatform/asf/cache/mcc.cache.impl
+com/alisoft/xplatform/asf/cache/mcc.cache.memcached
+com/alisoft/xplatform/asf/cache/mcc.cache.memcached/client
+

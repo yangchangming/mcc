@@ -1,7 +1,7 @@
 package com.yangchangming.mcc.transport;
 
-import com.yangchangming.mcc.protocal.Request;
 import com.yangchangming.mcc.protocal.Response;
+import com.yangchangming.mcc.protocal.Request;
 
 /**
  * <p> 通讯端点 </p>
