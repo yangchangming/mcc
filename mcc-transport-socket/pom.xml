@@ -11,5 +11,14 @@
 
     <artifactId>mcc-transport-socket</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.yangchangming</groupId>
+            <artifactId>mcc-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
