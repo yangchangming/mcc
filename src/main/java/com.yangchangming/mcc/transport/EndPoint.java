@@ -11,6 +11,13 @@ import com.yangchangming.mcc.protocal.Response;
  */
 public interface EndPoint extends Channel {
 
+    /**
+     * 发送请求
+     *
+     * @param request
+     * @return
+     * @throws TransportException
+     */
     Response request(Request request) throws TransportException;
 
 }
