@@ -1,4 +1,4 @@
-package com.yangchangming.mcc.transport;
+package com.yangchangming.mcc.transport.socket;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
