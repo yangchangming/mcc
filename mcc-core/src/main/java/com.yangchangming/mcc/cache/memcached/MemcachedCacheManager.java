@@ -193,7 +193,6 @@ public class MemcachedCacheManager implements ICacheManager<IMemcachedCache>
 	 */
 	protected void initMemCacheClientPool()
 	{
-		//��ʼ��socket pool
 		for(MemcachedClientSocketPoolConfig socketPool : memcachedClientSocketPoolConfigs)
 		{
 			if (socketPool != null && 

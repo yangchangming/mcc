@@ -117,8 +117,8 @@ import org.apache.log4j.Logger;
  * 	sock.close();	
  * </pre>
  * 
- * �Ż����Socket��Դ�أ����������Ч����
- * 
+ * ??????Socket???????????????Ч????
+ *
  * @author wenchu.cenwc<wenchu.cenwc@alibaba-inc.com>
  * 
  */
@@ -150,11 +150,11 @@ public class SockIOPool
 	// Constants
 
 	/**
-	 * socket��״̬����ʹ�ã�����æ
+	 * socket?????????????????
 	 */
 	private static final int SOCKET_STATUS_BUSY = 1;
 	/**
-	 * socket��״̬���Ѿ�ʧЧ
+	 * socket??????????Ч
 	 */
 	private static final int SOCKET_STATUS_DEAD = 2;
 	
@@ -197,7 +197,7 @@ public class SockIOPool
 	private int socketConnectTO = 1000 * 3; // default timeout of socket
 											// connections
 	@SuppressWarnings("unused")
-	private static int recBufferSize = 128;//������ݵĻ����С
+	private static int recBufferSize = 128;//????????????С
 	
 	private boolean aliveCheck = false; // default to not check each connection
 										// for being alive
@@ -490,8 +490,7 @@ public class SockIOPool
 	private void populateConsistentBuckets()
 	{
 		if (log.isDebugEnabled())
-			log
-					.debug("++++ initializing internal hashing structure for consistent hashing");
+			log.debug("++++ initializing internal hashing structure for consistent hashing");
 
 		// store buckets in tree map
 		this.consistentBuckets = new TreeMap<Long, String>();
@@ -529,32 +528,27 @@ public class SockIOPool
 
 					consistentBuckets.put(k, servers[i]);
 					if (log.isDebugEnabled())
-						log.debug("++++ added " + servers[i]
-								+ " to server bucket");
+						log.debug("++++ added " + servers[i] + " to server bucket");
 				}
 			}
 
 			// create initial connections
 			if (log.isDebugEnabled())
-				log.debug("+++ creating initial connections (" + initConn
-						+ ") for host: " + servers[i]);
+				log.debug("+++ creating initial connections (" + initConn + ") for host: " + servers[i]);
 
 			for (int j = 0; j < initConn; j++)
 			{
 				SockIO socket = createSocket(servers[i]);
 				if (socket == null)
 				{
-					log.error("++++ failed to create connection to: "
-							+ servers[i] + " -- only " + j + " created.");
+					log.error("++++ failed to create connection to: " + servers[i] + " -- only " + j + " created.");
 					break;
 				}
 
-				addSocketToPool(socketPool, servers[i], socket
-						,SOCKET_STATUS_ACTIVE,SOCKET_STATUS_ACTIVE, true);
+				addSocketToPool(socketPool, servers[i], socket,SOCKET_STATUS_ACTIVE,SOCKET_STATUS_ACTIVE, true);
 				
 				if (log.isDebugEnabled())
-					log.debug("++++ created and added socket: "
-							+ socket.toString() + " for host " + servers[i]);
+					log.debug("++++ created and added socket: " + socket.toString() + " for host " + servers[i]);
 			}
 		}
 	}
@@ -598,15 +592,12 @@ public class SockIOPool
 
 		try
 		{
-			socket = new SockIO(this, host, this.socketTO,
-					this.socketConnectTO, this.nagle);
+			socket = new SockIO(this, host, this.socketTO,this.socketConnectTO, this.nagle);
 
 			if (!socket.isConnected())
 			{
-				log.error("++++ failed to get SockIO obj for: " + host
-						+ " -- new socket is not connected");
-				addSocketToPool(socketPool, host, socket
-						,SOCKET_STATUS_DEAD,SOCKET_STATUS_DEAD,true);
+				log.error("++++ failed to get SockIO obj for: " + host + " -- new socket is not connected");
+				addSocketToPool(socketPool, host, socket,SOCKET_STATUS_DEAD,SOCKET_STATUS_DEAD,true);
 				// socket = null;
 			}
 		} catch (Exception ex)
@@ -626,17 +617,14 @@ public class SockIOPool
 				Date now = new Date();
 				hostDead.put(host, now);
 
-				long expire = (hostDeadDur.containsKey(host)) ? (((Long) hostDeadDur
-						.get(host)).longValue() * 2)
-						: 1000;
+				long expire = (hostDeadDur.containsKey(host)) ? (((Long) hostDeadDur.get(host)).longValue() * 2): 1000;
 
 				if (expire > MAX_RETRY_DELAY)
 					expire = MAX_RETRY_DELAY;
 
 				hostDeadDur.put(host, new Long(expire));
 				if (log.isDebugEnabled())
-					log.debug("++++ ignoring dead host: " + host + " for "
-							+ expire + " ms");
+					log.debug("++++ ignoring dead host: " + host + " for " + expire + " ms");
 
 				// also clear all entries for this host from availPool
 				clearHostFromPool(host);
@@ -2018,7 +2006,7 @@ public class SockIOPool
 		
 		private int recBufSize = 1028;
 		private int recIndex = 0;
-		//�ж��Ƿ���Ҫ������Ӵ��ڿ���״̬
+		//?ж??????????????????????
 		private long aliveTimeStamp = 0;
 
 		/**
@@ -2505,7 +2493,7 @@ public class SockIOPool
 			}
 			else
 			{
-				//�߽����
+				//??????
 				if (recBuf[recIndex-1] == 13)
 				{
 					strBuilder.append(new String(recBuf,0,recIndex-1));

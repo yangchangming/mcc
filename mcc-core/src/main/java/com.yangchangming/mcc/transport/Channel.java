@@ -33,20 +33,17 @@ public interface Channel {
      */
     boolean isAvailable();
 
-
-    /**
-     * 关闭
-     */
-    void close();
-
-
     /**
      * 打开
      *
      * @return
      */
-    boolean open();
+    boolean open(InetSocketAddress remoteAddress);
 
+    /**
+     * 关闭
+     */
+    void close();
 
     /**
      * 优雅关闭
