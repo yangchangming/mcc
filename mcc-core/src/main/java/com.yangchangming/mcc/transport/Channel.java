@@ -34,7 +34,7 @@ public interface Channel {
     boolean isAvailable();
 
     /**
-     * 打开
+     * 打开通讯管道，建立连接
      *
      * @return
      */
