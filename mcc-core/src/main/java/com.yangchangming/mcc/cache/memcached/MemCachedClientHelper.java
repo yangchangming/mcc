@@ -6,11 +6,11 @@ package com.yangchangming.mcc.cache.memcached;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yangchangming.mcc.cache.IMemcachedCache;
+import com.yangchangming.mcc.cache.memcached.client.MemCachedClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.alisoft.xplatform.asf.cache.IMemcachedCache;
-import com.alisoft.xplatform.asf.cache.memcached.client.MemCachedClient;
 
 /**
  * Ϊ��װ��MemCache�ṩʵ�ʴ���İ�����

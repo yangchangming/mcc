@@ -11,9 +11,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.yangchangming.mcc.cache.ICache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.alisoft.xplatform.asf.cache.ICache;
 
 /**
  * һ��Ĭ�ϵı���Cache��ʵ�֣��̰߳�ȫ

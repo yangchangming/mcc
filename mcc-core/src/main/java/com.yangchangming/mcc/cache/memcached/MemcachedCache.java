@@ -1,24 +1,16 @@
 package com.yangchangming.mcc.cache.memcached;
 
 import java.net.URLDecoder;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.yangchangming.mcc.cache.ICache;
+import com.yangchangming.mcc.cache.IMemcachedCache;
+import com.yangchangming.mcc.cache.impl.DefaultCacheImpl;
+import com.yangchangming.mcc.cache.memcached.client.MemCachedClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.alisoft.xplatform.asf.cache.ICache;
-import com.alisoft.xplatform.asf.cache.IMemcachedCache;
-import com.alisoft.xplatform.asf.cache.impl.DefaultCacheImpl;
-import com.alisoft.xplatform.asf.cache.memcached.client.MemCachedClient;
 
 public class MemcachedCache implements IMemcachedCache
 {
@@ -31,10 +23,7 @@ public class MemcachedCache implements IMemcachedCache
 	
 	static final String CACHE_STATUS_RESPONSE = "cacheStatusResponse";
 
-	/**
-	 * ��ݶ���
-	 */
-	private LinkedBlockingQueue<Object[]> dataQueue;	
+	private LinkedBlockingQueue<Object[]> dataQueue;
 	
 	public MemcachedCache(MemCachedClientHelper helper,int statisticsInterval)
 	{

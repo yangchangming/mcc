@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.yangchangming.mcc.cache.memcached.client;
 
 import java.util.*;
@@ -10,12 +7,8 @@ import java.nio.channels.*;
 import java.io.*;
 import java.net.URLEncoder;
 
-import com.yangchangming.mcc.transport.SockIOPool;
 import org.apache.log4j.Logger;
 
-import com.alisoft.xplatform.asf.cache.ICache;
-import com.alisoft.xplatform.asf.cache.impl.DefaultCacheImpl;
-import com.alisoft.xplatform.asf.cache.memcached.MemcachedException;
 
 
 /**

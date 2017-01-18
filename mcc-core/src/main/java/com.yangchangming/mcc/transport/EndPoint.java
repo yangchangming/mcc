@@ -4,7 +4,7 @@ import com.yangchangming.mcc.protocal.Response;
 import com.yangchangming.mcc.protocal.Request;
 
 /**
- * <p> 通讯端点 </p>
+ * <p> 通讯端点，每个端点对应一个memcached物理实例 </p>
  *
  * @author changming.Y <changming.yang.ah@gmail.com>
  * @since 2017-01-06 14:32

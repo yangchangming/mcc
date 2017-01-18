@@ -1,11 +1,13 @@
 package com.yangchangming.mcc.transport.netty;
 
 import com.yangchangming.mcc.transport.Channel;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.nio.channels.SocketChannel;
 
 /**
  * <p> 通讯管道netty实现 </p>
@@ -42,25 +44,24 @@ public class NettyChannel implements Channel {
         if (remoteAddress==null){
             return false;
         }
+        EventLoopGroup group = new NioEventLoopGroup();
 
         try {
-            Socket socket = null;
-            this.remoteAddress = remoteAddress;
-            SocketChannel channel = SocketChannel.open();
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.ALLOCATOR.TCP_NODELAY,true).handler(new NettyChannelInitializer());
 
-            if (channel.connect(remoteAddress)){
-                socket = channel.socket();
-            }
+            //sync open connection
+            io.netty.channel.Channel channel =  bootstrap.connect(remoteAddress).sync().channel();
 
+            channel.writeAndFlush(new Object());
 
-
-
-
-
-
-        } catch (IOException e) {
+            channel.closeFuture().sync();
+        } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            group.shutdownGracefully();
         }
+
         return false;
     }
 
