@@ -53,12 +53,12 @@ public class NettyChannel implements Channel {
             //sync open connection
             io.netty.channel.Channel channel =  bootstrap.connect(remoteAddress).sync().channel();
 
-            channel.writeAndFlush(new Object());
-
             channel.closeFuture().sync();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+            //todo not do this for multi channel
             group.shutdownGracefully();
         }
 
