@@ -19,4 +19,21 @@ public class NettyChannelFactory implements ChannelFactory {
     public Channel getChannel() {
         return null;
     }
+
+    public void initial(){
+
+    }
+
+    public boolean hasChannel(Channel channel){
+
+        if (channel==null) return  false;
+
+
+
+
+        return false;
+    }
+
+
+
 }

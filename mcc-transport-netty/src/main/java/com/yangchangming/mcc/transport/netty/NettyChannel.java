@@ -2,6 +2,7 @@ package com.yangchangming.mcc.transport.netty;
 
 import com.yangchangming.mcc.transport.Channel;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -50,10 +51,16 @@ public class NettyChannel implements Channel {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.ALLOCATOR.TCP_NODELAY,true).handler(new NettyChannelInitializer());
 
-            //sync open connection
-            io.netty.channel.Channel channel =  bootstrap.connect(remoteAddress).sync().channel();
+            //sync open connection,block?
+            ChannelFuture channelFuture =  bootstrap.connect(remoteAddress).sync();
 
-            channel.closeFuture().sync();
+            if (channelFuture.isSuccess()){
+
+                channelFuture.channel().isOpen();
+
+                //todo push channel to a map
+
+            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
