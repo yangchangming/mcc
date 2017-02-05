@@ -36,6 +36,15 @@ public class NettyChannel implements Channel {
         return this.remoteAddress;
     }
 
+    public String getIdentity() {
+
+        if (localAddress!=null && remoteAddress!=null){
+            return localAddress.getAddress().getHostAddress() + "-" + localAddress.getPort() + "-" +
+                    remoteAddress.getAddress().getHostAddress() + "-" + remoteAddress.getPort();
+        }
+        return null;
+    }
+
     public boolean isAvailable() {
         return false;
     }

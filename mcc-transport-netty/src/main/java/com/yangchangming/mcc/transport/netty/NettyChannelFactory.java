@@ -16,22 +16,24 @@ public class NettyChannelFactory implements ChannelFactory {
 
     private ConcurrentMap<String,Channel> channels = new ConcurrentHashMap<String, Channel>();
 
-    public Channel getChannel() {
-        return null;
+    public Channel getChannel(String identity) {
+
+        if (identity==null || "".equals(identity) || channels==null || channels.isEmpty()){
+            return null;
+        }
+        return channels.get(identity);
     }
 
     public void initial(){
 
     }
 
-    public boolean hasChannel(Channel channel){
+    public boolean hasChannel(String identity){
 
-        if (channel==null) return  false;
-
-
-
-
-        return false;
+        if (channels==null || channels.isEmpty() || !channels.containsKey(identity)){
+            return false;
+        }
+        return true;
     }
 
 

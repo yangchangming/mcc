@@ -9,10 +9,24 @@ package com.yangchangming.mcc.transport;
 public interface ChannelFactory {
 
     /**
+     * 初始化所有需要建立的channel
+     */
+    public void initial();
+
+    /**
      * 获取channel
      *
+     * @param identity   channel identity
      * @return
      * @throws TransportException
      */
-    Channel getChannel();
+    Channel getChannel(String identity);
+
+    /**
+     * 是否存在指定的channel
+     *
+     * @param  identity
+     * @return
+     */
+    public boolean hasChannel(String identity);
 }

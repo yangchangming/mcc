@@ -11,7 +11,7 @@ import java.net.InetSocketAddress;
 public interface Channel {
 
     /**
-     * 获取本地通讯地址
+     * 获取本地通讯端点网络地址
      *
      * @return
      */
@@ -19,11 +19,20 @@ public interface Channel {
 
 
     /**
-     * 获取远程通讯地址
+     * 获取远程通讯端点网络地址
      *
      * @return
      */
     InetSocketAddress getRemoteAddress();
+
+
+    /**
+     * 返回标志该channel的唯一合法标志
+     * 默认实现方式：客户端和服务端网络地址与端口的组合
+     *
+     * @return
+     */
+    String getIdentity();
 
 
     /**
