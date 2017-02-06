@@ -1,5 +1,6 @@
 package com.yangchangming.mcc.config;
 
+import com.yangchangming.mcc.cache.CacheContext;
 import com.yangchangming.mcc.cache.Client;
 import com.yangchangming.mcc.cache.MClient;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ConfigMgr {
 
+    private ChannelFactoryConfig channelFactoryConfig;
+
     private ConcurrentMap<String,Client> clients;
 
     private ConcurrentMap<String,MClient> mclients;
@@ -21,6 +24,7 @@ public class ConfigMgr {
     public void initial(){
 
         loadConfig();
+
     }
 
 
