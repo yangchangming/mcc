@@ -11,7 +11,7 @@ public interface ChannelFactory {
     /**
      * 初始化所有需要建立的channel
      */
-    public void initial();
+    void initial();
 
     /**
      * 获取channel
@@ -28,5 +28,5 @@ public interface ChannelFactory {
      * @param  identity
      * @return
      */
-    public boolean hasChannel(String identity);
+    boolean hasChannel(String identity);
 }
