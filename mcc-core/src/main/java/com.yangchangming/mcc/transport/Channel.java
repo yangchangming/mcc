@@ -47,7 +47,15 @@ public interface Channel {
      *
      * @return
      */
-    boolean open(InetSocketAddress remoteAddress);
+    boolean open();
+
+    /**
+     * 返回具体channel实现，如netty或者sokcet实现
+     *
+     * @return
+     */
+    Object channel();
+
 
     /**
      * 关闭

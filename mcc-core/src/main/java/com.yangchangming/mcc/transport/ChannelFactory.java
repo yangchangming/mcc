@@ -1,5 +1,9 @@
 package com.yangchangming.mcc.transport;
 
+import com.yangchangming.mcc.cache.Client;
+
+import java.util.Collection;
+
 /**
  * <p> channel工厂接口定义 </p>
  *
@@ -11,7 +15,7 @@ public interface ChannelFactory {
     /**
      * 初始化所有需要建立的channel
      */
-    void initial();
+    void initial(Collection<Client> clients);
 
     /**
      * 获取channel

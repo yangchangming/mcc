@@ -22,13 +22,25 @@ public class NettyChannel implements Channel {
 
     private InetSocketAddress remoteAddress;
 
+    private io.netty.channel.Channel channel;
+
+    /**
+     * Constructor
+     *
+     * @param localAddress
+     * @param remoteAddress
+     */
+    public NettyChannel(InetSocketAddress localAddress, InetSocketAddress remoteAddress){
+        this.localAddress = localAddress;
+        this.remoteAddress = remoteAddress;
+    }
+
     /**
      * 不支持获取通讯的本地地址
      *
      * @return
      */
     public InetSocketAddress getLocalAddress() {
-
         return null;
     }
 
@@ -49,9 +61,9 @@ public class NettyChannel implements Channel {
         return false;
     }
 
-    public boolean open(InetSocketAddress remoteAddress) {
+    public boolean open() {
 
-        if (remoteAddress==null){
+        if (this.remoteAddress==null){
             return false;
         }
         EventLoopGroup group = new NioEventLoopGroup();
@@ -64,21 +76,28 @@ public class NettyChannel implements Channel {
             ChannelFuture channelFuture =  bootstrap.connect(remoteAddress).sync();
 
             if (channelFuture.isSuccess()){
-
-                channelFuture.channel().isOpen();
-
-                //todo push channel to a map
-
+                if (channelFuture.channel().isOpen()){
+                    this.channel = channelFuture.channel();
+                }
             }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return false;
         } finally {
             //todo not do this for multi channel
             group.shutdownGracefully();
         }
+        return true;
+    }
 
-        return false;
+
+    public Object channel() {
+
+        if (channel!=null && channel instanceof io.netty.channel.Channel){
+            return channel;
+        }
+        return null;
     }
 
     public void close() {

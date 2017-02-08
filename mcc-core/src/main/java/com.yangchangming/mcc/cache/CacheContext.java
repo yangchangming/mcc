@@ -1,9 +1,7 @@
 package com.yangchangming.mcc.cache;
 
-import com.yangchangming.mcc.config.ChannelFactoryConfig;
 import com.yangchangming.mcc.protocal.Request;
 import com.yangchangming.mcc.protocal.Response;
-import com.yangchangming.mcc.transport.ChannelFactory;
 
 /**
  * <p> 缓存访问上下文 </p>
@@ -17,8 +15,6 @@ public class CacheContext {
 
     private Response response;
 
-    private static ChannelFactory channelFactory;
-
     private static final ThreadLocal<CacheContext> currentContext = new ThreadLocal<CacheContext>(){
 
         @Override
@@ -27,25 +23,14 @@ public class CacheContext {
         }
     };
 
-
+    /**
+     * 获取当前线程中的上下文对象
+     *
+     * @return
+     */
     public static CacheContext getContext(){
         return currentContext.get();
     }
-
-
-    public static CacheContext initialChannelFactory( ChannelFactoryConfig channelFactoryConfig){
-
-        if (channelFactoryConfig!=null){
-
-            //todo 解析xml
-            this.channelFactory = new NettyChannelFactory();
-        }
-
-    }
-
-
-
-
 
 
     public Request getRequest() {
@@ -64,11 +49,4 @@ public class CacheContext {
         this.response = response;
     }
 
-    public ChannelFactory getChannelFactory() {
-        return channelFactory;
-    }
-
-    public void setChannelFactory(ChannelFactory channelFactory) {
-        this.channelFactory = channelFactory;
-    }
 }

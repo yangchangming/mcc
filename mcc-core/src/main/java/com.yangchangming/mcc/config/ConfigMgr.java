@@ -1,9 +1,12 @@
 package com.yangchangming.mcc.config;
 
-import com.yangchangming.mcc.cache.CacheContext;
 import com.yangchangming.mcc.cache.Client;
 import com.yangchangming.mcc.cache.MClient;
+import com.yangchangming.mcc.transport.ChannelFactory;
 
+import java.util.Iterator;
+import java.util.ServiceLoader;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -14,17 +17,25 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ConfigMgr {
 
-    private ChannelFactoryConfig channelFactoryConfig;
+    private ConcurrentMap<String,Client> clients = new ConcurrentHashMap<String, Client>();
 
-    private ConcurrentMap<String,Client> clients;
-
-    private ConcurrentMap<String,MClient> mclients;
-
+    private ConcurrentMap<String,MClient> mclients = new ConcurrentHashMap<String, MClient>();
 
     public void initial(){
 
         loadConfig();
 
+        if (clients!=null && clients.size()>0){
+
+            //todo jdk spi ..... extension class
+            ServiceLoader<ChannelFactory> serviceLoader = ServiceLoader.load(ChannelFactory.class);
+            Iterator iterator = serviceLoader.iterator();
+
+            if (iterator.hasNext()){
+                ChannelFactory channelFactory = (ChannelFactory) iterator.next();
+                channelFactory.initial(clients.values());
+            }
+        }
     }
 
 
@@ -33,6 +44,7 @@ public class ConfigMgr {
      */
     private void loadConfig(){
 
+        //todo 加载配置文件 建立配置对象，放入相应容器中
     }
 
 }

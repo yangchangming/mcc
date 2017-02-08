@@ -20,4 +20,12 @@ public interface EndPoint extends Channel {
      */
     Response request(Request request) throws TransportException;
 
+
+    /**
+     * 获取关联的通讯管道
+     *
+     * @return
+     */
+    Channel channel();
+
 }

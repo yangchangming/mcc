@@ -1,10 +1,10 @@
 package com.yangchangming.mcc.transport.netty;
 
+import com.yangchangming.mcc.cache.Client;
 import com.yangchangming.mcc.transport.Channel;
-import com.yangchangming.mcc.transport.ChannelFactory;
+import com.yangchangming.mcc.transport.support.AbstractChannelFactory;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Collection;
 
 /**
  * <p> channel工厂netty实现 </p>
@@ -12,30 +12,19 @@ import java.util.concurrent.ConcurrentMap;
  * @author changming.Y <changming.yang.ah@gmail.com>
  * @since 2017-01-15 19:34
  */
-public class NettyChannelFactory implements ChannelFactory {
+public class NettyChannelFactory extends AbstractChannelFactory {
 
-    private ConcurrentMap<String,Channel> channels = new ConcurrentHashMap<String, Channel>();
 
-    public Channel getChannel(String identity) {
+    public void initial(Collection<Client> clients) {
 
-        if (identity==null || "".equals(identity) || channels==null || channels.isEmpty()){
-            return null;
+        for (Client client : clients) {
+            Channel channel = new NettyChannel(client.getLocalAddress(),client.getRemoteAddress());
+            channel.open();
+            channels.putIfAbsent(client.getIdentity(),channel);
         }
-        return channels.get(identity);
     }
 
-    public void initial(){
-
+    @Override
+    public void get() {
     }
-
-    public boolean hasChannel(String identity){
-
-        if (channels==null || channels.isEmpty() || !channels.containsKey(identity)){
-            return false;
-        }
-        return true;
-    }
-
-
-
 }
